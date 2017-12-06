@@ -12,7 +12,7 @@ def main
   mapping = PDC::V1::ReleaseRpmMapping.where(
     release_id: 'ceph-2.1-updates@rhel-7', package: 'ceph'
   ).first
-  puts mapping.mapping
+  puts mapping.mapping, ' ok'
 end
 
 main if $PROGRAM_NAME == __FILE__

@@ -10,7 +10,7 @@ Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 
 Metrics/LineLength:
-  Max: 100
+  Max: 120
 
 Metrics/MethodLength:
   Max: 25
@@ -18,3 +18,7 @@ Metrics/MethodLength:
 Metrics/AbcSize:
   Max: 25
 
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*.rb
+    - examples/**/*.rb

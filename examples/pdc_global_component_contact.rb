@@ -1,16 +1,18 @@
+#!/usr/bin/env ruby
+
 require './lib/pdc'
-require 'ap'
 
 def main
   PDC.configure do |config|
     config.site = 'https://pdc.engineering.redhat.com'
     config.log_level = :debug
+    config.disable_caching = true
   end
 
-  releases = PDC::V1::Release.all!.to_a
-  ap releases
-  released_files = PDC::V1::ReleasedFile.all!.to_a
-  ap released_files
+  comp_contact = PDC::V1::GlobalComponentContact.where(
+    component: 'vlgothic-fonts'
+  ).find_one!
+  puts comp_contact.contact
 end
 
 main if $PROGRAM_NAME == __FILE__

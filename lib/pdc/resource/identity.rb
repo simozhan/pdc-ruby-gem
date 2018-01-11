@@ -24,6 +24,14 @@ module PDC::Resource
         @resource_path ||= model_name.collection.sub(%r{^pdc\/}, '').tr('_', '-')
       end
 
+      def mapping
+        @mapping || {}
+      end
+
+      def mapping=(mapping = {})
+        @mapping = mapping
+      end
+
       private
 
       def default_uri

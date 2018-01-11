@@ -11,6 +11,10 @@ module PDC::Resource
         @name = name
       end
 
+      def load
+        find_one! # Override for plural associations that return an association object
+      end
+
       private
 
       def foreign_key

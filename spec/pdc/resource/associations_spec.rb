@@ -28,17 +28,23 @@ describe PDC::Resource::Associations do
         ProductVersion.new.non_existings
       end
     end
+  end
 
+  describe 'has many' do
     it 'has many association' do
       releases = ProductVersion.new(product_version_id: 'dp-1').releases.to_a
       assert_equal 'dp-1.0', releases.first.release_id
     end
+  end
 
+  describe 'find has many' do
     it 'find on has many association' do
       release = ProductVersion.new(product_version_id: 'dp-1').releases.find('dp-1.0')
       assert_equal 'dp-1.0', release.release_id
     end
+  end
 
+  describe 'scope' do
     it 'scopes on associations' do
       releases = ProductVersion.new(product_version_id: 'dp-1').releases.where(release_id: 'dp-1.0').to_a
       assert_equal 'dp-1.0', releases.first.release_id
@@ -96,6 +102,13 @@ describe PDC::Resource::Associations do
 
       product_version.releases.to_a
       assert_requested endpoint2, times: 1
+    end
+  end
+
+  describe 'has_one' do
+    it 'has_one assocation' do
+      variant_cpe = ReleaseVariant.new(release: 'dp-1.0', uid: 'Client').variant_cpe
+      assert_equal 'cpe:/asdff', variant_cpe.cpe
     end
   end
 end

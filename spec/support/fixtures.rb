@@ -137,4 +137,13 @@ module Fixtures
   class Release < Association
     self.primary_key = :release_id
   end
+
+  class ReleaseVariant < Association
+    has_one :variant_cpe, uri: 'rest_api/v1/variant-cpes/?release=:release&variant_uid=:uid', foreign_key: 'release/variant_uid'
+    self.mapping = { variant_uid: 'uid' }
+  end
+
+  class VariantCpe < Association
+    self.primary_key = :id
+  end
 end

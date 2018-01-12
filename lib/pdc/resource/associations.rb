@@ -1,6 +1,7 @@
 require 'pdc/resource/associations/has_many'
 require 'pdc/resource/associations/association'
 require 'pdc/resource/associations/builder'
+require 'pdc/resource/associations/has_one'
 
 module PDC::Resource
   module Associations
@@ -22,6 +23,14 @@ module PDC::Resource
 
         define_method "#{name.to_s.singularize}_ids" do
           association(name).map(&:id)
+        end
+      end
+
+      def has_one(name, options = {})
+        create_association(name, HasOne, options)
+
+        define_method "build_#{name}" do |attributes = nil|
+          association(name).build(attributes)
         end
       end
 
